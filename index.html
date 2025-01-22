@@ -12,30 +12,34 @@
         <nav>
             <h1 class="text-center">Controle de Produtos</h1>
         </nav>
-        <form class="container border border-dark rouded col-8 d-flex flex-column align-items-center bg-white rounded-3 pb-4">
+        <form id="form" class="container border border-dark rouded col-8 d-flex flex-column align-items-center bg-white rounded-3 pb-4">
+            <div class="my-2 w-75 form-group">
+                <label for="id" class="form-label">ID:</label>
+                <input id="id" type="number" class="form-control border-dark" value="1">
+            </div>
             <div class="my-2 w-75 form-group">
                 <label for="nome" class="form-label">Nome do Produto:</label>
                 <input id="nome" type="text" class="form-control border-dark" required>
             </div>
             <div class="my-2 w-75 form-group">
                 <label for="categoria" class="form-label">Categoria do Produto:</label>
-                <input id="categoria" type="text" class="form-control border-dark"required>
+                <input id="categoria" type="text" class="form-control border-dark" required>
             </div>
             <div class="my-2 w-75 form-group">
                 <label for="descricao" class="form-label">Descrição do Produto:</label>
-                <input id="descricao" type="text" class="form-control border-dark"required>
+                <input id="descricao" type="text" class="form-control border-dark" required>
             </div>
             <div class="my-2 w-75 form-group">
                 <label for="quantidade" class="form-label">Quantidade em estoque:</label>
-                <input id="quantidade" type="text" class="form-control border-dark"required>
+                <input id="quantidade" type="text" class="form-control border-dark" required>
             </div>
             <div class="my-2 w-75 form-group">
                 <label for="preco" class="form-label">Preço do Produto:</label>
-                <input step='0.01' id="preco" type="number" class="form-control border-dark"required>
+                <input step='0.01' id="preco" type="number" class="form-control border-dark" required>
             </div>
             <div class="my-2 w-75 form-group">
                 <label for="imagem" class="form-label">Imagem:</label>
-                <input id="imagem" type="url" class="form-control border-dark"required>
+                <input id="imagem" type="url" class="form-control border-dark" required>
             </div>
             <div class="row w-75 form-group mt-2 gap-3">
                 <button class="btn btn-outline-danger col">Resetar</button>
@@ -49,7 +53,7 @@
             </div>
         </section>
     </main>
-    <Script src="app/main.js"></Script>
+    <script src="app/main.js"></script>
 
 </body>
 </html>

@@ -1,7 +1,7 @@
 function criarProduto(event) {
     event.preventDefault();
     const dados = {};
-    const ids = ['nome', 'categoria' , 'descricao' , 'quantidade' , 'preco' , 'imagem'];
+    const ids = ['id', 'nome', 'categoria' , 'descricao' , 'quantidade' , 'preco' , 'imagem'];
 
     for (const id of ids) {
         const elementoHTML = document.getElementById(id);
@@ -23,6 +23,13 @@ function criarProduto(event) {
         localStorage.setItem('produtos', listaJSON)
         alert(`O produto ${dados.nome} foi cadastrado com sucesso`)
     }
+
+    const form = document.getElementById('form');
+    form.reset();
+
+    const inputId = document.getElementById('id');
+    inputId.value = parseInt(inputId.value) + 1;
+
     renderizarProdutos();
 }
 
@@ -32,13 +39,14 @@ function renderizarProdutos () {
         produtosSalvos = '[]';
     }
     const lista = JSON.parse(produtosSalvos);
-    console.log(lista)
+
     const display = document.getElementById('display');
     display.innerHTML = ' ';
     for (const produto of lista) {
         
         let cardHTML = `<div class="col">
                     <div class="card">
+                        ${produto.id}
                         <img style="max-height: 128px; object-fit: contain;" src="${produto.imagem}" class="card-img-top" alt="imagem do produto" />
                         <div class="card-body">
                             <h5 class="card-title">${produto.categoria}</h5>
@@ -64,6 +72,5 @@ function renderizarProdutos () {
     display.innerHTML += cardHTML;
     }
 }
-renderizarProdutos();
 
-// https://docemalu.vtexassets.com/arquivos/ids/5358351-800-auto?v=638693564581770000&width=800&height=auto&aspect=true
+renderizarProdutos();
