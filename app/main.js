@@ -54,7 +54,7 @@ function renderizarProdutos () {
                             <p class="card-text">${produto.descricao}</p>
                             <footer class="d-flex justify-content-between align-items-center">
                                 <div class="controls">
-                                    <button class="btn rounded-full btn-danger">
+                                    <button data_id="${produto.id}" onclick="excluir(event)" class="btn rounded-full btn-danger">
                                         -
                                     </button>
                                     <button data_id="${produto.id}" class="btn rounded-full btn-secondary" onclick='carregarDadosProduto(event)'>
@@ -79,9 +79,45 @@ function carregarDadosProduto(event) {
     const id = event.target.getAttribute('data_id');
     const alterarProduto = localStorage.getItem('produtos');
     const alterarDados = JSON.parse(alterarProduto);
-    const idProduto = alterarDados.find(Dados => Dados.id == id);
+    const produto = alterarDados.find(Dados => Dados.id == id);
 
+    const campos = ['id', 'nome', 'categoria' , 'descricao' , 'quantidade' , 'preco' , 'imagem'];
 
-    console.log(idProduto)
-
+    for (const campo of campos) {
+        const elementoHTML = document.getElementById(campo);
+        elementoHTML.value = produto[campo];
+    }    
 } 
+
+function salvarAlteracoes(event) {
+    event.preventDefault();
+    const dados = {};
+    const ids = ['id', 'nome', 'categoria' , 'descricao' , 'quantidade' , 'preco' , 'imagem'];
+
+    for (const id of ids) {
+        const elementoHTML = document.getElementById(id);
+        const valor = elementoHTML.value;
+        dados[id] = valor;
+    }
+
+    let produtosSalvos = localStorage.getItem('produtos');
+    if (produtosSalvos == null ) {
+        produtosSalvos = '[]';
+    }
+
+    const lista = JSON.parse(produtosSalvos);
+    const posicao = lista.findIndex((produto) => produto.id == dados.id);
+    lista[posicao] = dados;
+    localStorage.setItem('produtos', JSON.stringify(lista));
+    renderizarProdutos();
+}
+
+function excluir(event) {
+    const id = event.target.getAttribute('data_id');
+    const produtosSalvosJSON =localStorage.getItem('produtos');
+    const produtos = JSON.parse(produtosSalvosJSON);
+
+    const produtosFiltrados = produtos.filter((produto) => produto.id != id);
+    localStorage.setItem('produtos', JSON.stringify(produtosFiltrados));
+    renderizarProdutos();
+}
